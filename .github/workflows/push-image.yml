@@ -70,10 +70,13 @@ jobs:
           docker tag ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:${{ steps.get_version.outputs.version }} \
             ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:${{ github.sha }}
           docker tag ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:${{ steps.get_version.outputs.version }} \
+            ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:main
+          docker tag ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:${{ steps.get_version.outputs.version }} \
             ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:latest
 
       - name: Push tags to GHCR
         run: |
           docker push ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:${{ steps.get_version.outputs.version }}
           docker push ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:${{ github.sha }}
+          docker push ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:main
           docker push ghcr.io/${{ steps.ghcr_owner.outputs.owner }}/spring-petclinic:latest
