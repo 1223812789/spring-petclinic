@@ -22,7 +22,9 @@ jobs:
         id: get_version
         run: |
           python3 - <<'PY'
+          import os
           import xml.etree.ElementTree as ET
+
           root = ET.parse('pom.xml').getroot()
           ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
           version = root.findtext('m:version', namespaces=ns)
@@ -30,7 +32,12 @@ jobs:
               version = root.findtext('m:parent/m:version', namespaces=ns)
           if version is None or version == '':
               raise SystemExit('Could not determine project version from pom.xml')
-          with open('$GITHUB_OUTPUT', 'a', encoding='utf-8') as f:
+
+          output_path = os.environ.get('GITHUB_OUTPUT')
+          if not output_path:
+              raise SystemExit('GITHUB_OUTPUT is not defined')
+
+          with open(output_path, 'a', encoding='utf-8') as f:
               f.write(f'version={version}\n')
           PY
 
