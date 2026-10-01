@@ -1,27 +1,23 @@
-name: Blank Workflow
+name: Greeting Action Test
 
-on: [push, pull_request, workflow_dispatch]
+'on':
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
-  build:
+  greet:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run a one-line script
-        run: echo "Hello, world!"
+      - name: Run custom greeting action
+        id: greeting
+        uses: ./actions/greeting
+        with:
+          username: Alice
+          greeting: Bonjour
 
-
-  test1:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: test after build
-        run: echo "after build"
-        
-  test2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: test in parallel with build
-        run: echo "parallel with build"
+      - name: Display greeting output
+        run: "echo \"Message from action: ${{ steps.greeting.outputs.message }}\""

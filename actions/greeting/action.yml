@@ -1,0 +1,20 @@
+name: Custom Greeting
+
+description: Build a personalized greeting and expose it as an output
+
+inputs:
+  username:
+    description: Name to greet
+    required: true
+  greeting:
+    description: Greeting to prepend
+    required: false
+    default: Hello
+
+outputs:
+  message:
+    description: The generated greeting message
+
+runs:
+  using: node20
+  main: index.js
