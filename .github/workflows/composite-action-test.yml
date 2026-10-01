@@ -1,0 +1,22 @@
+name: Composite Action Test
+
+'on':
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  composite-greeting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run composite greeting action
+        id: composite
+        uses: ./actions/composite-greeting
+        with:
+          who-to-greet: Alice
+
+      - name: Display generated number
+        run: "echo \"Random number: ${{ steps.composite.outputs.random-number }}\""
