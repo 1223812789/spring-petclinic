@@ -1,0 +1,22 @@
+name: Docker Action Test
+
+'on':
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  docker-greeting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Docker greeting action
+        id: docker_greeting
+        uses: ./actions/docker-greeting
+        with:
+          message: Hello from Docker action
+
+      - name: Display output from Docker action
+        run: "echo \"Docker output: ${{ steps.docker_greeting.outputs.output-message }}\""
