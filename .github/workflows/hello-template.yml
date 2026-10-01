@@ -1,0 +1,16 @@
+name: Reusable Hello Workflow
+
+on:
+  workflow_call:
+    inputs:
+      first-name:
+        description: First name to greet
+        required: true
+        type: string
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print greeting
+        run: echo "Bonjour ${{ inputs.first-name }} depuis le workflow réutilisable !"
