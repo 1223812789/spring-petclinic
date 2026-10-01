@@ -1,0 +1,17 @@
+name: Docker Greeting
+
+description: Print a message from a Docker action and expose it as an output
+
+inputs:
+  message:
+    description: Message to display in the container logs
+    required: false
+    default: Hello from Docker action
+
+outputs:
+  output-message:
+    description: The message forwarded to later workflow steps
+
+runs:
+  using: docker
+  image: Dockerfile
